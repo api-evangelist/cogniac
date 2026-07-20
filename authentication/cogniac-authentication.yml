@@ -1,0 +1,50 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/Cogniac/skills/blob/main/skills/cogniac/SKILL.md
+docs: https://docs.cogniac.io/
+api_base: https://api.cogniac.io/
+notes: >-
+  Derived from the official Cogniac SDK/CLI and the provider-published agent
+  skill (no OpenAPI is published for the Cogniac public API). The public API is
+  a multi-tenant REST API; nearly every call also requires a tenant selection.
+summary:
+  types: [apiKey, http, browserLogin]
+  api_key_in: [header, env]
+  oauth2_flows: []
+  multi_tenant: true
+schemes:
+  - name: apiKey
+    type: apiKey
+    in: header
+    description: >-
+      Per-user API key. Supplied via the COG_API_KEY environment variable, the
+      api_key= constructor argument to CogniacConnection, or produced/stored by
+      `cogniac auth login`. Sent on the authenticated session to api.cogniac.io.
+  - name: usernamePassword
+    type: http
+    scheme: basic
+    description: >-
+      Username/password login via COG_USER / COG_PASS (or constructor args),
+      exchanged for a session/API key.
+  - name: browserLogin
+    type: interactive
+    description: >-
+      `cogniac auth login` opens the browser and authenticates via the existing
+      Cogniac web session (password or SAML SSO), then stores a per-user API key
+      for subsequent CLI/SDK use.
+  - name: samlSSO
+    type: openIdConnect
+    description: >-
+      Enterprise SAML single sign-on is supported through the web session that
+      `cogniac auth login` rides on.
+tenant_selection:
+  required: true
+  mechanisms: [COG_TENANT env, '--tenant <tenant_id> CLI flag', 'tenant_id= SDK arg']
+  note: >-
+    A user authorized for more than one tenant must set a tenant explicitly;
+    omitting it raises ClientError(400) Unauthorized. Exceptions: `cogniac auth`
+    and `cogniac tenants` do not need a tenant.
+credential_precedence:
+  - explicit args
+  - COG_API_KEY
+  - stored login (cogniac auth login)
