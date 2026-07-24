@@ -1,0 +1,32 @@
+generated: '2026-07-18'
+method: searched
+source: https://pypi.org/project/cogniac/
+notes: >-
+  First-party client libraries for the Cogniac public API (api.cogniac.io),
+  maintained by Cogniac Corporation. The Python package also ships the CLI
+  binaries catalogued in cli/cogniac-cli.yml (cogniac, icogniac, cogupload,
+  cogstats).
+packages:
+  - language: python
+    registry: pypi
+    name: cogniac
+    url: https://pypi.org/project/cogniac/
+    repository: https://github.com/Cogniac/cogniac-sdk-py
+    install: pip install 'cogniac>=3.2.0'
+    version: 3.2.0
+    license: Apache-2.0
+    official: true
+    description: >-
+      Official Python SDK for the Cogniac public API. Provides both synchronous
+      (CogniacConnection) and asynchronous (AsyncCogniacConnection) interfaces.
+      Requires Python >= 3.11.
+  - language: csharp
+    registry: github
+    name: cogniac-sdk-csharp
+    url: https://github.com/Cogniac/cogniac-sdk-csharp
+    repository: https://github.com/Cogniac/cogniac-sdk-csharp
+    license: Apache-2.0
+    official: true
+    archived: true
+    description: >-
+      Official C# SDK for the Cogniac public API. Archived (read-only) on GitHub.

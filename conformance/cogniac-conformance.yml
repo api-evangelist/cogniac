@@ -1,0 +1,35 @@
+generated: '2026-07-18'
+method: searched
+source: >-
+  https://cogniac.ai/news/ (SOC 2 badge);
+  https://github.com/Cogniac/skills/blob/main/skills/cogniac/SKILL.md
+notes: >-
+  Standards/compliance posture for Cogniac. SOC 2 is a published, verifiable
+  compliance claim (SOC2 badge + article on cogniac.ai/news/). Cross-cutting API
+  standards are derived from the documented API behavior; no OpenAPI is
+  published, so security-scheme conformance is asserted from SDK/CLI docs.
+compliance_programs:
+  - id: soc2
+    name: SOC 2
+    published: true
+    evidence: https://cogniac.ai/news/cogniac-confirmed-as-soc2-compliant/
+    source_page: https://cogniac.ai/news/
+standards:
+  - id: soc2
+    conforms: true
+    evidence: Published "Cogniac confirmed as SOC2 compliant" on cogniac.ai/news/
+  - id: oauth2
+    conforms: false
+    evidence: API uses per-user API keys + username/password; SAML SSO for web login, not OAuth2 for the API.
+  - id: saml-sso
+    conforms: true
+    evidence: Enterprise SAML single sign-on documented for web login (cogniac auth login).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: 'Errors use a proprietary error envelope (type/status/message/hint), not application/problem+json.'
+  - id: rate-limiting
+    conforms: true
+    evidence: Public API enforces rate limits; 429 with Retry-After honored by SDK/CLI.
+  - id: pagination
+    conforms: true
+    evidence: Cursor pagination via last_key; SDK follows pagination automatically.

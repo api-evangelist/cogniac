@@ -1,0 +1,85 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/Cogniac/skills/blob/main/skills/cogniac/SKILL.md
+notes: >-
+  The `cogniac` CLI (and companion utilities) ship in the `cogniac` PyPI package.
+  The binary itself is catalogued in packages/cogniac-packages.yml; this file
+  captures its command surface. Output is JSON by default (agent-friendly);
+  --format supports json|jsonl|table.
+binaries:
+  - name: cogniac
+    description: >-
+      Primary agent-friendly CLI. Nested noun -> sub-noun -> verb command tree,
+      JSON default output. Discover the whole surface with `cogniac commands`
+      (machine-readable catalog of every command + args).
+  - name: icogniac
+    description: Interactive IPython shell with a pre-loaded CogniacConnection.
+  - name: cogupload
+    description: Parallel bulk media ingestion (multi-threaded) into an input subject.
+  - name: cogstats
+    description: >-
+      Aggregate EdgeFlow/CloudFlow statistics (pixels processed, detections
+      emitted) over a time window; requires -t <tenant>.
+install:
+  - method: pip
+    command: pip install 'cogniac>=3.2.0'
+conventions:
+  output_formats: [json, jsonl, table]
+  default_format: json
+  global_flags: ['--format', '--tenant']
+  discovery: cogniac commands
+  timestamps: epoch seconds or ISO 8601 (--start/--end)
+  pagination: complete result set by default; cap with --limit, resume with --cursor
+  request_bodies: '--body accepts inline JSON, @FILE, or - (stdin)'
+  error_envelope: >-
+    failures print {"error": {type, status, message, hint}} to stderr and exit
+    non-zero; type is auth|client|server|connection|rate_limit
+command_groups:
+  - group: auth
+    verbs: [login]
+    examples: ['cogniac auth', 'cogniac auth login']
+  - group: tenants / tenant
+    examples: ['cogniac tenants', 'cogniac tenant']
+  - group: application (app/apps)
+    examples:
+      - cogniac apps list
+      - cogniac apps get <application_id>
+      - cogniac apps eval-metrics <application_id>
+      - cogniac apps leaderboard <application_id>
+    sub_resources: [events, event types, detections pending, replay, performance, feedback, consensus history, consensus release, evaluation metrics, model, build, type]
+  - group: subject (subjects)
+    examples:
+      - cogniac subjects list
+      - cogniac subjects get <subject_uid>
+      - cogniac subjects search --name "exact name"
+      - cogniac subjects media <subject_uid>
+      - cogniac subjects create "My Subject"
+      - cogniac subjects associate <subject_uid> <media_id> --consensus True
+  - group: media
+    examples:
+      - cogniac media get <media_id>
+      - cogniac media download <media_id> -o out.jpg
+      - cogniac media search --filename "img.jpg"
+      - cogniac media upload /path/to/image.jpg --subject-uid <subject_uid>
+    sub_resources: [detection, embeddings, share]
+  - group: edgeflow (edgeflows/gateway)
+    examples:
+      - cogniac edgeflows list
+      - cogniac edgeflows status <gateway_id> --subsystem gpus --limit 1
+      - cogniac edgeflows metrics names
+      - cogniac edgeflows metrics list --metric-name <name>
+    sub_resources: [event (reboot/ping/upgrade/factory-reset/...), certificate]
+  - group: cameras (network camera)
+    examples:
+      - cogniac cameras list
+      - cogniac cameras get <network_camera_id>
+  - group: deployment (deployments)
+    examples:
+      - cogniac deployments list
+      - cogniac deployments get <deployment_group_id>
+    sub_resources: [edgeflows, history, prepull, target workflow set, capacity]
+  - group: workflow (workflows)
+    examples:
+      - cogniac workflows get <workflow_id>
+  - group: user
+    sub_resources: [api-key]

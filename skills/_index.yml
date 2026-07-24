@@ -1,0 +1,40 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/Cogniac/skills
+notes: >-
+  Provider-published Agent Skill saved verbatim from the official Cogniac/skills
+  repository (Apache 2.0). Installable via `npx skills add Cogniac/skills` or the
+  Claude Code plugin marketplace. cogniac-python-sdk.md is the skill's bundled
+  references/python-sdk.md, also verbatim.
+skills:
+  - file: cogniac-platform.md
+    name: cogniac
+    description: >-
+      Query and manage the Cogniac computer vision platform — tenants,
+      applications, subjects, media, EdgeFlow/CloudFlow appliances, cameras,
+      deployments, and workflows via the `cogniac` CLI and Python SDK against
+      the public API at api.cogniac.io.
+    api: https://api.cogniac.io/
+    official: true
+    source: https://raw.githubusercontent.com/Cogniac/skills/main/skills/cogniac/SKILL.md
+    operations:
+      - auth
+      - tenants
+      - apps list
+      - apps get
+      - subjects list
+      - subjects media
+      - media upload
+      - media download
+      - edgeflows status
+      - cameras list
+      - deployments list
+      - workflows get
+  - file: cogniac-python-sdk.md
+    name: cogniac Python SDK reference
+    description: >-
+      Sync + async Python SDK reference (CogniacConnection and resource classes)
+      bundled with the provider skill.
+    api: https://api.cogniac.io/
+    official: true
+    source: https://raw.githubusercontent.com/Cogniac/skills/main/skills/cogniac/references/python-sdk.md

@@ -1,21 +1,75 @@
 aid: cogniac
 name: Cogniac
-description: Cogniac is a company surfaced as a portfolio company of wing-venture-capital and added to
-  the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Cogniac is a low-code enterprise AI computer-vision platform that turns visual
+  data from cameras and image/video streams into automated visual inspection and
+  defect detection across manufacturing, transportation, logistics, and
+  government operations. Its cloud platform (CloudCore) exposes a multi-tenant
+  public REST API at api.cogniac.io covering tenants, applications
+  (classification, box/point detection, http_input, camera_capture, and
+  integration types), subjects, media, detections, on-premise EdgeFlow GPU
+  appliances, cloud-hosted CloudFlow, network cameras, deployment groups, and
+  workflows. Cogniac ships an official Python SDK and CLI (plus an archived C#
+  SDK) and a provider-published agent skill, and is SOC 2 compliant.
 url: https://raw.githubusercontent.com/api-evangelist/cogniac/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://github.com/Cogniac.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - wing-venture-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
-apis: []
+- Computer Vision
+- Artificial Intelligence
+- Machine Learning
+- Visual Inspection
+- Defect Detection
+- Edge AI
+- Manufacturing
+- Industrial IoT
+- MLOps
+apis:
+- name: Cogniac Public API
+  description: >-
+    Multi-tenant REST API for the Cogniac computer-vision platform (CloudCore):
+    manage tenants, applications, subjects, media, detections, EdgeFlow/CloudFlow
+    appliances, network cameras, deployment groups, and workflows. Authenticated
+    with a per-user API key (or username/password / SAML SSO via cogniac auth
+    login); JSON request/response; cursor pagination; rate limited.
+  humanURL: https://docs.cogniac.io/
+  baseURL: https://api.cogniac.io/
+  tags:
+  - Computer Vision
+  - Machine Learning
+  - Visual Inspection
+  properties:
+  - type: Documentation
+    url: https://docs.cogniac.io/
+  - type: Authentication
+    url: authentication/cogniac-authentication.yml
+  - type: Conventions
+    url: conventions/cogniac-conventions.yml
+  - type: ErrorCatalog
+    url: errors/cogniac-error-codes.yml
+  - type: DataModel
+    url: data-model/cogniac-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -24,3 +78,52 @@ maintainers:
 common:
 - type: Website
   url: https://cogniac.ai/
+- type: DeveloperPortal
+  url: https://docs.cogniac.io/
+- type: Documentation
+  url: https://docs.cogniac.io/
+- type: APIReference
+  url: https://docs.cogniac.io/
+- type: GettingStarted
+  url: https://github.com/Cogniac/cogniac-sdk-py
+- type: Login
+  url: https://cogniac.io/app/login
+- type: Support
+  url: https://cogniac.ai/contact/
+- type: Blog
+  url: https://cogniac.ai/news/
+- type: GitHubOrganization
+  url: https://github.com/Cogniac
+- type: TermsOfService
+  url: https://cogniac.ai/terms-of-service/
+- type: PrivacyPolicy
+  url: https://cogniac.ai/privacy/
+- type: Packages
+  url: packages/cogniac-packages.yml
+- type: SDKs
+  url: packages/cogniac-packages.yml
+- type: CLI
+  url: cli/cogniac-cli.yml
+- type: Authentication
+  url: authentication/cogniac-authentication.yml
+- type: Conventions
+  url: conventions/cogniac-conventions.yml
+- type: ErrorCatalog
+  url: errors/cogniac-error-codes.yml
+- type: DataModel
+  url: data-model/cogniac-data-model.yml
+- type: Conformance
+  url: conformance/cogniac-conformance.yml
+- type: Compliance
+  url: https://cogniac.ai/news/cogniac-confirmed-as-soc2-compliant/
+- type: DomainSecurity
+  url: security/cogniac-domain-security.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/cogniac-llms.txt
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

@@ -1,0 +1,107 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  https://github.com/Cogniac/skills (SKILL.md + references/python-sdk.md);
+  https://github.com/Cogniac/cogniac-sdk-py
+notes: >-
+  Entity-relationship graph for the Cogniac public API, derived from the
+  documented SDK resource classes and the id-reference fields the platform
+  documents (no OpenAPI is published, so relationships are read from the SDK
+  object model and skill documentation rather than $ref links).
+entities:
+  - name: Tenant
+    sdk_class: CogniacTenant
+    key: tenant_id
+    description: An organization/account. Users may belong to multiple tenants.
+  - name: User
+    sdk_class: CogniacUser
+    key: user_id
+    description: A user account; holds one or more API keys.
+  - name: ApiKey
+    key: api_key
+    description: Per-user credential minted via `cogniac auth login`.
+  - name: Application
+    sdk_class: CogniacApplication
+    key: application_id
+    description: >-
+      An ML pipeline consuming input subjects and producing output subjects.
+      types: classification, box_detection, point_detection,
+      point_count_detection, integration, http_input, camera_capture.
+  - name: Subject
+    sdk_class: CogniacSubject
+    key: subject_uid
+    description: A category/concept (e.g. "defect", "good part"); media flows via subject associations.
+  - name: Media
+    sdk_class: CogniacMedia
+    key: media_id
+    description: An image or video with metadata, detections, and subject associations.
+    fields: [external_media_id, domain_unit, md5, filename]
+  - name: Detection
+    key: detection_id
+    description: A model prediction or human judgment linking media to a subject with a probability (0-1).
+  - name: EdgeFlow
+    sdk_class: CogniacEdgeFlow
+    key: gateway_id
+    description: On-premise GPU appliance running inference (models RM-ML80, IPC-M20).
+  - name: NetworkCamera
+    sdk_class: CogniacNetworkCamera
+    key: network_camera_id
+    description: Camera configuration; in use when a camera_capture app references it.
+  - name: DeploymentGroup
+    sdk_class: CogniacDeployment
+    key: deployment_group_id
+    description: A logical grouping of EdgeFlows for coordinated model rollout.
+  - name: Workflow
+    sdk_class: CogniacWorkflow
+    key: workflow_id
+    description: A deployment workflow; deployed when its id is a group's target_workflow_id.
+  - name: Build
+    sdk_class: CogniacBuild
+    key: build_id
+    description: A model/integration build (integration apps deploy via /1/builds).
+relationships:
+  - from: Tenant
+    to: Application
+    type: has_many
+  - from: Tenant
+    to: Subject
+    type: has_many
+  - from: Tenant
+    to: User
+    type: has_many
+  - from: User
+    to: ApiKey
+    type: has_many
+  - from: Application
+    to: Subject
+    type: has_many
+    via: input_subjects
+  - from: Application
+    to: Subject
+    type: has_many
+    via: output_subjects
+  - from: Application
+    to: NetworkCamera
+    type: has_many
+    via: app_type_config.camera_group_list
+    condition: type == camera_capture
+  - from: Media
+    to: Subject
+    type: has_many
+    via: subject associations / detections
+  - from: Detection
+    to: Media
+    type: belongs_to
+  - from: Detection
+    to: Subject
+    type: belongs_to
+  - from: DeploymentGroup
+    to: EdgeFlow
+    type: has_many
+  - from: DeploymentGroup
+    to: Workflow
+    type: has_one
+    via: target_workflow_id
+  - from: Workflow
+    to: Build
+    type: has_many

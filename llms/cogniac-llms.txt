@@ -1,0 +1,51 @@
+# Cogniac
+
+> Cogniac is a low-code enterprise AI computer-vision platform. It turns visual data from cameras and image/video streams into automated visual inspection and defect detection across manufacturing, transportation, logistics, and government operations. The platform ("CloudCore") exposes a multi-tenant public REST API at api.cogniac.io, with on-premise EdgeFlow GPU appliances and cloud-hosted CloudFlow for inference, an official Python SDK and CLI, and a published agent skill.
+
+## APIs
+
+- [Cogniac Public API](https://docs.cogniac.io/): Multi-tenant REST API for tenants, applications (classification/box/point detection, http_input, camera_capture, integration), subjects, media, detections, EdgeFlow/CloudFlow appliances, network cameras, deployments, and workflows. Base URL https://api.cogniac.io/.
+
+## SDKs & CLI
+
+- [Python SDK (PyPI)](https://pypi.org/project/cogniac/): Official SDK, sync + async. `pip install 'cogniac>=3.2.0'`.
+- [cogniac-sdk-py (source)](https://github.com/Cogniac/cogniac-sdk-py): Apache-2.0.
+- [cogniac-sdk-csharp](https://github.com/Cogniac/cogniac-sdk-csharp): Official C# SDK (archived).
+- CLI: `cogniac` (agent-friendly JSON CLI), `icogniac` (IPython shell), `cogupload` (bulk upload), `cogstats` (aggregate stats) — all ship in the `cogniac` PyPI package.
+
+## Agent skill
+
+- [Cogniac agent skill](https://github.com/Cogniac/skills): Provider-published Agent Skill for driving the Cogniac platform from an agent via the CLI/SDK/public API. `npx skills add Cogniac/skills --skill cogniac`.
+
+## Docs
+
+- [Platform documentation / Knowledge Base](https://docs.cogniac.io/)
+- [Product](https://cogniac.ai/product/)
+- [Resources](https://cogniac.ai/resources/)
+- [News](https://cogniac.ai/news/)
+
+## Authentication
+
+- Per-user API key (COG_API_KEY header) or username/password; `cogniac auth login` stores a per-user key (password or SAML SSO). Multi-tenant: set COG_TENANT / --tenant.
+
+## Company
+
+- [Cogniac](https://cogniac.ai/)
+- [Login](https://cogniac.io/app/login)
+- [Terms of Service](https://cogniac.ai/terms-of-service/)
+- [Privacy Policy](https://cogniac.ai/privacy/)
+- SOC 2 compliant (see https://cogniac.ai/news/)
+- Support: support@cogniac.ai
+- [GitHub organization](https://github.com/Cogniac)
+
+## Artifacts (API Evangelist)
+
+- [APIs.json](https://raw.githubusercontent.com/api-evangelist/cogniac/refs/heads/main/apis.yml)
+- [Packages](https://raw.githubusercontent.com/api-evangelist/cogniac/refs/heads/main/packages/cogniac-packages.yml)
+- [CLI](https://raw.githubusercontent.com/api-evangelist/cogniac/refs/heads/main/cli/cogniac-cli.yml)
+- [Authentication](https://raw.githubusercontent.com/api-evangelist/cogniac/refs/heads/main/authentication/cogniac-authentication.yml)
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/cogniac/refs/heads/main/conventions/cogniac-conventions.yml)
+- [Error codes](https://raw.githubusercontent.com/api-evangelist/cogniac/refs/heads/main/errors/cogniac-error-codes.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/cogniac/refs/heads/main/data-model/cogniac-data-model.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/cogniac/refs/heads/main/conformance/cogniac-conformance.yml)
+- [Agent skill](https://raw.githubusercontent.com/api-evangelist/cogniac/refs/heads/main/skills/cogniac-platform.md)

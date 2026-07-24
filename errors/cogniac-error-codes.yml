@@ -1,0 +1,44 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/Cogniac/skills/blob/main/skills/cogniac/SKILL.md
+notes: >-
+  The Cogniac public API surfaces failures through a structured error envelope.
+  The SDK/CLI classify every failure into one of five error `type`s and expose
+  the underlying HTTP status. Captured from official SDK/CLI behavior; the
+  Cogniac API does not publish an RFC 9457 problem+json catalog.
+envelope:
+  shape: '{"error": {"type", "status", "message", "hint"}}'
+  fields:
+    type: one of auth | client | server | connection | rate_limit
+    status: underlying HTTP status code
+    message: human-readable description
+    hint: optional self-heal suggestion (present only when an action applies)
+  transport: written to stderr by the CLI; exit code non-zero
+error_types:
+  - type: auth
+    meaning: Authentication / authorization failure (invalid or missing credential, wrong tenant).
+    typical_status: [400, 401, 403]
+    remediation: Run `cogniac auth login`; verify COG_TENANT is set for multi-tenant users.
+  - type: client
+    meaning: Client-side request error (bad input, not found, ordering violation).
+    typical_status: [400, 404, 409]
+    remediation: >-
+      Check request arguments; note deletion ordering (deactivate apps before
+      delete; delete subjects only after referencing apps are gone).
+  - type: server
+    meaning: Server-side error in Cogniac CloudCore.
+    typical_status: [500, 502, 503]
+    remediation: Retry with backoff; contact support@cogniac.ai if persistent.
+  - type: connection
+    meaning: Network/transport failure reaching api.cogniac.io.
+    typical_status: []
+    remediation: Verify connectivity and COG_URL_PREFIX; retry.
+  - type: rate_limit
+    meaning: API rate limit exceeded.
+    typical_status: [429]
+    remediation: >-
+      SDK/CLI >= 3.2.0 auto-retry with exponential backoff honoring Retry-After;
+      a persistent 429 surfaces as this type.
+known_status_examples:
+  - status: 400
+    context: CogniacConnection() without a tenant on a multi-tenant user -> ClientError(400) Unauthorized.

@@ -1,0 +1,47 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/Cogniac/skills/blob/main/skills/cogniac/SKILL.md
+docs: https://docs.cogniac.io/
+notes: >-
+  Cross-cutting request/response semantics for the Cogniac public API
+  (api.cogniac.io), captured from the official SDK/CLI behavior and the
+  provider-published agent skill. No idempotency-key contract is documented, so
+  no Idempotency pointer is emitted.
+authentication:
+  style: per-user API key (header) or username/password; multi-tenant
+  see: authentication/cogniac-authentication.yml
+pagination:
+  style: cursor
+  default: complete result set (SDK follows API pagination automatically)
+  params: ['--limit N', '--cursor', 'last_key (raw API param)']
+  raw_api_field: last_key
+  truncation_signal: >-
+    when --limit truncates, a {"truncated": true, ...} notice is written to
+    stderr (stdout stays a clean array/stream)
+error_envelope:
+  shape: '{"error": {"type", "status", "message", "hint"}}'
+  types: [auth, client, server, connection, rate_limit]
+  transport: printed to stderr, non-zero exit (CLI)
+  see: errors/cogniac-error-codes.yml
+rate_limiting:
+  enforced: true
+  retry_after: honored
+  client_behavior: >-
+    SDK/CLI >= 3.2.0 retry 429 automatically with exponential backoff honoring
+    Retry-After; a persistent 429 surfaces as error type "rate_limit"
+timestamps:
+  formats: [epoch seconds, ISO 8601]
+  clocks: [gw_timestamp (gateway), cc_timestamp (cloud receipt), timestamp]
+versioning:
+  style: uri-path
+  note: >-
+    Endpoints are versioned in the path (e.g. /1/tenants/current/workflows). The
+    SDK strips any trailing slash and /<version> suffix from the configured
+    url_prefix on load.
+regions:
+  default: https://api.cogniac.io (Cogniac CloudCore)
+  override: COG_URL_PREFIX env / url_prefix= SDK arg for other deployments
+content_type: application/json
+idempotency:
+  supported: false
+  note: No idempotency-key header/contract is documented for the public API.
