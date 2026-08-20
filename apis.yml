@@ -36,6 +36,17 @@ created: '2026-07-17'
 modified: '2026-07-18'
 tags:
 - Company
+- Computer-Vision
+- Artificial Intelligence
+- Machine-Learning
+- Visual Inspection
+- Defect Detection
+- Edge AI
+- Manufacturing
+- Industrial IoT
+- MLOps
+tags_raw:
+- Company
 - Computer Vision
 - Artificial Intelligence
 - Machine Learning
@@ -56,6 +67,10 @@ apis:
   humanURL: https://docs.cogniac.io/
   baseURL: https://api.cogniac.io/
   tags:
+  - Computer-Vision
+  - Machine-Learning
+  - Visual Inspection
+  tags_raw:
   - Computer Vision
   - Machine Learning
   - Visual Inspection
