@@ -48,9 +48,9 @@ created: '2026-07-17'
 modified: '2026-07-18'
 tags:
 - Company
-- Computer-Vision
+- Computer Vision
 - Artificial Intelligence
-- Machine-Learning
+- Machine Learning
 - Visual Inspection
 - Defect Detection
 - Edge AI
@@ -68,6 +68,8 @@ tags_raw:
 - Manufacturing
 - Industrial IoT
 - MLOps
+- Computer-Vision
+- Machine-Learning
 apis:
 - name: Cogniac Public API
   description: >-
@@ -79,13 +81,15 @@ apis:
   humanURL: https://docs.cogniac.io/
   baseURL: https://api.cogniac.io/
   tags:
-  - Computer-Vision
-  - Machine-Learning
+  - Computer Vision
+  - Machine Learning
   - Visual Inspection
   tags_raw:
   - Computer Vision
   - Machine Learning
   - Visual Inspection
+  - Computer-Vision
+  - Machine-Learning
   properties:
   - type: Documentation
     url: https://docs.cogniac.io/
