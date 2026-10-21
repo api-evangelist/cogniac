@@ -31,6 +31,46 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-agent-skills.py
   first_seen: '2026-10-20'
+- partner_name: Cisco (own)
+  partner: cisco
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.cisco.com/en-US/apps/405969
+  mirror_of: cisco/integrations/cisco-integration-edges.yml
+  apps:
+  - Cogniac - Manufacturing
+  - Cogniac - Retail
+  listing_count: 2
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: Video Analytics
+  badges:
+  - available-through-cisco
+- partner_name: Cisco Meraki (own)
+  partner: cisco-meraki
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.cisco.com/en-US/apps/405966
+  mirror_of: cisco-meraki/integrations/cisco-meraki-integration-edges.yml
+  apps:
+  - Cogniac - Logistics
+  - Cogniac - Healthcare
+  listing_count: 2
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: Video Analytics
+  badges:
+  - available-through-cisco
 generated: '2026-10-20'
 method: searched
 source:
@@ -42,3 +82,5 @@ checked:
 - https://officialskills.sh/sitemap.xml
 - https://skillsmp.com/sitemap.xml
 - https://www.skills.sh/sitemap.xml
+- cisco-meraki/integrations/cisco-meraki-integration-edges.yml
+- cisco/integrations/cisco-integration-edges.yml
